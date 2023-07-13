@@ -118,14 +118,15 @@ exports.getTourStats = catchAsync(
 
 exports.getMonthlyPlan = catchAsync(
   async (req, res, next) => {
-    const year = req.params.year * 1;
+    const year = req.params.year * 1; // 2021
+
     const plan = await Tour.aggregate([
       {
         $unwind: '$startDates',
       },
       {
         $match: {
-          startDates: {
+          'startDates.date': {
             $gte: new Date(`${year}-01-01`),
             $lte: new Date(`${year}-12-31`),
           },
@@ -133,9 +134,7 @@ exports.getMonthlyPlan = catchAsync(
       },
       {
         $group: {
-          _id: {
-            $month: '$startDates',
-          },
+          _id: { $month: '$startDates.date' },
           numTourStarts: { $sum: 1 },
           tours: { $push: '$name' },
         },
@@ -149,9 +148,10 @@ exports.getMonthlyPlan = catchAsync(
         },
       },
       {
-        $sort: {
-          numTourStarts: -1,
-        },
+        $sort: { numTourStarts: -1 },
+      },
+      {
+        $limit: 12,
       },
     ]);
 
@@ -163,6 +163,7 @@ exports.getMonthlyPlan = catchAsync(
     });
   }
 );
+
 exports.getToursWithin = catchAsync(
   async (req, res, next) => {
     const { distance, latlng, unit } = req.params;
@@ -218,6 +219,7 @@ exports.getDistance = catchAsync(async (req, res, next) => {
     },
     {
       $project: {
+        _id: 0,
         distance: 1,
         name: 1,
       },

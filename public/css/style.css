@@ -693,6 +693,72 @@ body {
   fill: #bbb;
 }
 
+/* ////////////////////////////////////////////////////////////// */
+/* New changes by me */
+.reviews__tour {
+  text-decoration: none;
+  color: #444;
+  font-size: 2rem;
+}
+
+.reviews__change {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.review__edit {
+  text-transform: uppercase;
+  color: #ffffff;
+  transition: all 0.3s;
+  height: 2rem;
+  width: 6rem;
+  padding: 0.3rem 0;
+  border: unset;
+  background-color: #20bf6b;
+  border-radius: 0.5rem;
+}
+
+.review__delete {
+  text-transform: uppercase;
+  color: #ffffff;
+  transition: all 0.3s;
+  height: 2rem;
+  width: 6rem;
+  padding: 0.3rem 0;
+  border: unset;
+  background-color: rgb(255, 0, 0);
+  border-radius: 0.5rem;
+}
+
+.review__cancel {
+  text-transform: uppercase;
+  color: #ffffff;
+  transition: all 0.3s;
+  height: 2rem;
+  width: 6rem;
+  padding: 0.3rem 0;
+  border: unset;
+  background-color: black;
+  border-radius: 0.5rem;
+}
+
+.review__change:hover {
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15); */
+}
+
+.review__change:active {
+  -webkit-transform: translateY(-1px);
+  transform: translateY(-1px);
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); */
+}
+/* ////////////////////////////////////////////////////////////// */
+
 .section-cta {
   margin-top: calc(0px - var(--section-rotate));
   padding: 3rem;
@@ -1357,4 +1423,8 @@ body {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
+}
+
+.add-review {
+  margin-top: 10rem;
 }

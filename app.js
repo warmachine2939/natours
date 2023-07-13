@@ -14,6 +14,7 @@ const scriptSrcUrls = [
   'https://tile.openstreetmap.org',
   'https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js',
   'https://cdnjs.cloudflare.com/',
+  'https://js.stripe.com/v3/',
 ];
 const styleSrcUrls = [
   'https://unpkg.com/',

@@ -1,6 +1,7 @@
 const Tour = require('../models/tourModel');
 const User = require('../models/userModel');
 const Booking = require('../models/bookingModel');
+const Review = require('../models/reviewModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
@@ -38,7 +39,19 @@ exports.getTour = catchAsync(async (req, res, next) => {
       new AppError('There is no tour with that name', 404)
     );
   }
+  const booking = await Booking.findOne({
+    user: res.locals.user,
+    tour: tour,
+  });
 
+  let commentExist;
+  if (res.locals.user) {
+    commentExist = tour.reviews.some(
+      (review) => review.user.id === res.locals.user.id
+    );
+  }
+
+  const booked = !!booking;
   res
     .status(200)
     .set(
@@ -48,6 +61,8 @@ exports.getTour = catchAsync(async (req, res, next) => {
     .render('tour', {
       title: `${tour.name} tour`,
       tour,
+      booked,
+      commentExist,
     });
 });
 exports.getLoginForm = (req, res) => {
@@ -61,7 +76,17 @@ exports.getLoginForm = (req, res) => {
       title: 'Log into your account',
     });
 };
-
+exports.getSignupForm = (req, res) => {
+  res
+    .status(200)
+    .set(
+      'Content-Security-Policy',
+      "connect-src 'self' https://cdnjs.cloudflare.com"
+    )
+    .render('signup', {
+      title: 'Create a new account',
+    });
+};
 exports.getAccount = (req, res) => {
   res.status(200).render('account', {
     title: 'Your Account',
@@ -83,8 +108,28 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getMyReviews = catchAsync(
+  async (req, res, next) => {
+    // 1) Get reviews of the currently logged in user
+
+    const reviews = await Review.find({
+      user: res.locals.user.id,
+    }).populate({
+      path: 'tour',
+      select: 'name slug',
+    });
+
+    res.status(200).render('reviews', {
+      title: 'My reviews',
+      reviews,
+      toursNames: true,
+    });
+  }
+);
+
 exports.updateUserData = catchAsync(
   async (req, res, next) => {
+    console.log(req.params);
     const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
       {

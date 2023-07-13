@@ -24,6 +24,9 @@ router.get(
   authcontroller.isLoggedIn,
   viewsController.getLoginForm
 );
+
+router.get('/signup', viewsController.getSignupForm);
+
 router.get(
   '/me',
   authcontroller.protect,
@@ -33,6 +36,11 @@ router.get(
   '/my-tours',
   authcontroller.protect,
   viewsController.getMyTours
+);
+router.get(
+  '/my-reviews',
+  authcontroller.isLoggedIn,
+  viewsController.getMyReviews
 );
 router.post(
   '/submit-user-data',
