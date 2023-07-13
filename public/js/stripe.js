@@ -9,7 +9,7 @@ export const bookTour = async (tourId, startDateId) => {
     // 1) Get checkout session from API
     console.log('working');
     const session = await axios(
-      `http://127.0.0.1:3000/api/v1/booking/checkout-session/${tourId}/${startDateId}`
+      `/api/v1/booking/checkout-session/${tourId}/${startDateId}`
     );
     console.log(session.data.session.id, session);
     // 2) Create checkout form + charge the credit card

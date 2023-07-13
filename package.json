@@ -6,6 +6,7 @@
   "targets": {
     "main": false
   },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start:dev": "nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",

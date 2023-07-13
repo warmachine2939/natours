@@ -142,12 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"6Dkv9":[function(require,module,exports) {
+})({"2AEXk":[function(require,module,exports) {
+var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
-var HMR_ENV_HASH = "d3b2b06b76a601ee";
-module.bundle.HMR_BUNDLE_ID = "d9be90a44b51a87a";
+var HMR_ENV_HASH = "cf9964d7cd13d610";
+module.bundle.HMR_BUNDLE_ID = "9829f2c984d7e3d5";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -572,7 +573,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     });
 }
 
-},{}],"f06Gm":[function(require,module,exports) {
+},{}],"lWmi2":[function(require,module,exports) {
 /*eslint-disable*/ var _leaflet = require("./leaflet");
 var _login = require("./login");
 var _updateSettings = require("./updateSettings");
@@ -721,7 +722,7 @@ if (reviews) reviews.addEventListener("click", (e)=>{
 const alertMessage = document.querySelector("body").dataset.alert;
 if (alertMessage) (0, _alerts.showAlert)("success", alertMessage, 6);
 
-},{"./leaflet":"kT9M8","./login":"etLx8","./updateSettings":"lI3km","./stripe":"4Uufy","./alerts":"2eb19","./reviews":"iW2xW"}],"kT9M8":[function(require,module,exports) {
+},{"./leaflet":"4sFsv","./login":"6VoTa","./updateSettings":"eGzdJ","./stripe":"fnTsv","./reviews":"aawpy","./alerts":"1yzLc"}],"4sFsv":[function(require,module,exports) {
 /*eslint-disable*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "displayMap", ()=>displayMap);
@@ -756,7 +757,7 @@ const displayMap = (locations)=>{
     map.scrollWheelZoom.disable();
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"lX9ej"}],"lX9ej":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5XPgh"}],"5XPgh":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -786,7 +787,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"etLx8":[function(require,module,exports) {
+},{}],"6VoTa":[function(require,module,exports) {
 /*eslint-disable*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "login", ()=>login);
@@ -798,7 +799,7 @@ const login = async (email, password)=>{
     try {
         const res = await axios({
             method: "POST",
-            url: "http://127.0.0.1:3000/api/v1/users/login",
+            url: "/api/v1/users/login",
             data: {
                 email,
                 password
@@ -819,7 +820,7 @@ const logout = async (email, password)=>{
     try {
         const res = await axios({
             method: "GET",
-            url: "http://127.0.0.1:3000/api/v1/users/logout"
+            url: "/api/v1/users/logout"
         });
         if (res.data.status === "success") location.reload(true);
     } catch (error) {
@@ -830,7 +831,7 @@ const signup = async (name, email, password, passwordConfirm)=>{
     try {
         const res = await axios({
             method: "POST",
-            url: "http://127.0.0.1:3000/api/v1/users/signup",
+            url: "/api/v1/users/signup",
             data: {
                 name,
                 email,
@@ -849,7 +850,7 @@ const signup = async (name, email, password, passwordConfirm)=>{
     }
 };
 
-},{"./alerts":"2eb19","@parcel/transformer-js/src/esmodule-helpers.js":"lX9ej"}],"2eb19":[function(require,module,exports) {
+},{"./alerts":"1yzLc","@parcel/transformer-js/src/esmodule-helpers.js":"5XPgh"}],"1yzLc":[function(require,module,exports) {
 /*eslint-disable*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "hideAlert", ()=>hideAlert);
@@ -865,7 +866,7 @@ const showAlert = (type, msg)=>{
     window.setTimeout(hideAlert, 5000);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"lX9ej"}],"lI3km":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5XPgh"}],"eGzdJ":[function(require,module,exports) {
 /*eslint-disable*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "updateSettings", ()=>updateSettings);
@@ -873,7 +874,7 @@ var _alerts = require("./alerts");
 const updateSettings = async (data, type)=>{
     try {
         console.log(data);
-        const url = type === "password" ? "http://127.0.0.1:3000/api/v1/users/updateMyPassword" : "http://127.0.0.1:3000/api/v1/users/updateMe";
+        const url = type === "password" ? "/api/v1/users/updateMyPassword" : "/api/v1/users/updateMe";
         const res = await axios({
             method: "PATCH",
             url,
@@ -885,7 +886,7 @@ const updateSettings = async (data, type)=>{
     }
 };
 
-},{"./alerts":"2eb19","@parcel/transformer-js/src/esmodule-helpers.js":"lX9ej"}],"4Uufy":[function(require,module,exports) {
+},{"./alerts":"1yzLc","@parcel/transformer-js/src/esmodule-helpers.js":"5XPgh"}],"fnTsv":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "bookTour", ()=>bookTour);
@@ -895,7 +896,7 @@ const bookTour = async (tourId, startDateId)=>{
     try {
         // 1) Get checkout session from API
         console.log("working");
-        const session = await axios(`http://127.0.0.1:3000/api/v1/booking/checkout-session/${tourId}/${startDateId}`);
+        const session = await axios(`/api/v1/booking/checkout-session/${tourId}/${startDateId}`);
         console.log(session.data.session.id, session);
         // 2) Create checkout form + charge the credit card
         await stripe.redirectToCheckout({
@@ -907,7 +908,7 @@ const bookTour = async (tourId, startDateId)=>{
     }
 };
 
-},{"./alerts":"2eb19","@parcel/transformer-js/src/esmodule-helpers.js":"lX9ej"}],"iW2xW":[function(require,module,exports) {
+},{"./alerts":"1yzLc","@parcel/transformer-js/src/esmodule-helpers.js":"5XPgh"}],"aawpy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "leaveReview", ()=>leaveReview);
@@ -973,6 +974,6 @@ const deleteReview = async (reviewId)=>{
     }
 };
 
-},{"./alerts":"2eb19","@parcel/transformer-js/src/esmodule-helpers.js":"lX9ej"}]},["6Dkv9","f06Gm"], "f06Gm", "parcelRequire11c7")
+},{"./alerts":"1yzLc","@parcel/transformer-js/src/esmodule-helpers.js":"5XPgh"}]},["2AEXk","lWmi2"], "lWmi2", "parcelRequire11c7")
 
 //# sourceMappingURL=index.js.map
