@@ -10,18 +10,8 @@ const tourSchema = new mongoose.Schema(
       required: [true, 'A tour must have a name'],
       unique: true,
       trim: true,
-      maxlength: [
-        40,
-        'A tour name must be less than 40 characters',
-      ],
-      minlength: [
-        10,
-        'A tour name must be at least 10 characters',
-      ],
-      // validate: [
-      //   validator.isAlpha,
-      //   'Tour name must only contain characters',
-      // ],
+      maxlength: [40, 'A tour name must be less than 40 characters'],
+      minlength: [10, 'A tour name must be at least 10 characters'],
     },
     slug: String,
     duration: {
@@ -37,8 +27,7 @@ const tourSchema = new mongoose.Schema(
       required: [true, 'A tour must have a difficulty'],
       enum: {
         values: ['easy', 'medium', 'difficult'],
-        message:
-          'Difficulty must be easy, medium or difficult',
+        message: 'Difficulty must be easy, medium or difficult',
       },
     },
     ratingsAverage: {
@@ -63,8 +52,7 @@ const tourSchema = new mongoose.Schema(
         validator: function (value) {
           return value < this.price;
         },
-        message:
-          'Discount price ({VALUE}) must be less than the price',
+        message: 'Discount price ({VALUE}) must be less than the price',
       },
     },
     summary: {
@@ -166,9 +154,7 @@ tourSchema.pre('save', function (next) {
 });
 
 tourSchema.pre('save', async function (next) {
-  const guidesPromises = this.guides.map(
-    async (id) => await User.findById(id)
-  );
+  const guidesPromises = this.guides.map(async (id) => await User.findById(id));
   this.guides = await Promise.all(guidesPromises);
   next();
 });

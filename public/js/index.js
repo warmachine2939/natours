@@ -67,7 +67,7 @@ if (signupForm) {
 
 if (userDataForm)
   userDataForm.addEventListener('submit', (e) => {
-    console.log('works');
+    // console.log('works');
     e.preventDefault();
     const form = new FormData();
     form.append(

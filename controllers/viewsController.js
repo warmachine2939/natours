@@ -11,16 +11,10 @@ exports.getOverview = catchAsync(async (req, res, next) => {
   //2) Build template
 
   //3) Rendaer that template using tour data
-  res
-    .status(200)
-    .set(
-      'Content-Security-Policy',
-      "connect-src 'self' https://cdnjs.cloudflare.com"
-    )
-    .render('overview', {
-      title: 'All Tours',
-      tours,
-    });
+  res.status(200).set('Content-Security-Policy', "connect-src 'self' https://cdnjs.cloudflare.com").render('overview', {
+    title: 'All Tours',
+    tours,
+  });
 });
 
 exports.getTour = catchAsync(async (req, res, next) => {
@@ -35,9 +29,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
   //2) build template
   //3) Render the template using data
   if (!tour) {
-    return next(
-      new AppError('There is no tour with that name', 404)
-    );
+    return next(new AppError('There is no tour with that name', 404));
   }
   const booking = await Booking.findOne({
     user: res.locals.user,
@@ -46,18 +38,13 @@ exports.getTour = catchAsync(async (req, res, next) => {
 
   let commentExist;
   if (res.locals.user) {
-    commentExist = tour.reviews.some(
-      (review) => review.user.id === res.locals.user.id
-    );
+    commentExist = tour.reviews.some((review) => review.user.id === res.locals.user.id);
   }
 
   const booked = !!booking;
   res
     .status(200)
-    .set(
-      'Content-Security-Policy',
-      "connect-src 'self' https://cdnjs.cloudflare.com"
-    )
+    .set('Content-Security-Policy', "connect-src 'self' https://cdnjs.cloudflare.com")
     .render('tour', {
       title: `${tour.name} tour`,
       tour,
@@ -66,26 +53,14 @@ exports.getTour = catchAsync(async (req, res, next) => {
     });
 });
 exports.getLoginForm = (req, res) => {
-  res
-    .status(200)
-    .set(
-      'Content-Security-Policy',
-      "connect-src 'self' https://cdnjs.cloudflare.com"
-    )
-    .render('login', {
-      title: 'Log into your account',
-    });
+  res.status(200).set('Content-Security-Policy', "connect-src 'self' https://cdnjs.cloudflare.com").render('login', {
+    title: 'Log into your account',
+  });
 };
 exports.getSignupForm = (req, res) => {
-  res
-    .status(200)
-    .set(
-      'Content-Security-Policy',
-      "connect-src 'self' https://cdnjs.cloudflare.com"
-    )
-    .render('signup', {
-      title: 'Create a new account',
-    });
+  res.status(200).set('Content-Security-Policy', "connect-src 'self' https://cdnjs.cloudflare.com").render('signup', {
+    title: 'Create a new account',
+  });
 };
 exports.getAccount = (req, res) => {
   res.status(200).render('account', {
@@ -108,42 +83,38 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getMyReviews = catchAsync(
-  async (req, res, next) => {
-    // 1) Get reviews of the currently logged in user
+exports.getMyReviews = catchAsync(async (req, res, next) => {
+  // 1) Get reviews of the currently logged in user
 
-    const reviews = await Review.find({
-      user: res.locals.user.id,
-    }).populate({
-      path: 'tour',
-      select: 'name slug',
-    });
+  const reviews = await Review.find({
+    user: res.locals.user.id,
+  }).populate({
+    path: 'tour',
+    select: 'name slug',
+  });
 
-    res.status(200).render('reviews', {
-      title: 'My reviews',
-      reviews,
-      toursNames: true,
-    });
-  }
-);
+  res.status(200).render('reviews', {
+    title: 'My reviews',
+    reviews,
+    toursNames: true,
+  });
+});
 
-exports.updateUserData = catchAsync(
-  async (req, res, next) => {
-    console.log(req.params);
-    const updatedUser = await User.findByIdAndUpdate(
-      req.user.id,
-      {
-        name: req.body.name,
-        email: req.body.email,
-      },
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-    res.status(200).render('account', {
-      title: 'Your Account',
-      user: updatedUser,
-    });
-  }
-);
+exports.updateUserData = catchAsync(async (req, res, next) => {
+  console.log(req.params);
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id,
+    {
+      name: req.body.name,
+      email: req.body.email,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  res.status(200).render('account', {
+    title: 'Your Account',
+    user: updatedUser,
+  });
+});

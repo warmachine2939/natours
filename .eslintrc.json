@@ -10,7 +10,7 @@
       "off",
       {
         "singleQuote": true,
-        "printWidth": 60
+        "printWidth": 120
       }
     ],
     "spaced-comment": "off",
